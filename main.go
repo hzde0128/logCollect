@@ -5,6 +5,7 @@ import (
 	"logAgent/conf"
 	"logAgent/etcd"
 	"logAgent/kafka"
+	"logAgent/taillog"
 	"time"
 
 	"gopkg.in/ini.v1"
@@ -33,7 +34,7 @@ func main() {
 		return
 	}
 	// 1.初始化kafka
-	err = kafka.Init([]string{cfg.KafkaConf.Address})
+	err = kafka.Init([]string{cfg.KafkaConf.Address}, cfg.KafkaConf.ChanMaxSize)
 	if err != nil {
 		fmt.Printf("init kafka failed ,err:%v\n", err)
 		return
@@ -58,14 +59,7 @@ func main() {
 	for index, value := range logEntryConf {
 		fmt.Printf("index:%v value:%v\n", index, value)
 	}
-	// 2.初始化taillog
-	// err = taillog.Init(cfg.TailConf.Filename)
-	// if err != nil {
-	// 	fmt.Printf("init taillog failed, err:%v\n", err)
-	// 	return
-	// }
-	// fmt.Println("init taillog success")
 
-	// // 3.执行任务
-	// run()
+	// 3. 收集日志发往Kafka
+	taillog.Init(logEntryConf)
 }
