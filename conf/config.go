@@ -1,8 +1,13 @@
 package conf
 
 type AppConf struct {
+	CenterConf `ini:"center"`
 	KafkaConf `ini:"kafka"`
 	EtcdConf  `ini:"etcd"`
+}
+
+type CenterConf struct {
+	Address string `ini:"address"`
 }
 
 type KafkaConf struct {

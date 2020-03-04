@@ -13,6 +13,12 @@ var (
 	client *clientv3.Client
 )
 
+// 需要收集的日志的配置信息
+type LogEntry struct {
+	Path  string `json:"path"`  // 日志存放的路径
+	Topic string `json:"topic"` // 日志要发往Kafka中的哪个Topic
+}
+
 func Init(addrs string, timeout time.Duration) (err error) {
 	client, err = clientv3.New(clientv3.Config{
 		Endpoints:   []string{addrs},
@@ -22,12 +28,6 @@ func Init(addrs string, timeout time.Duration) (err error) {
 		return
 	}
 	return
-}
-
-// 需要收集的日志的配置信息
-type LogEntry struct {
-	Path  string `json:"path"`  // 日志存放的路径
-	Topic string `json:"topic"` // 日志要发往Kafka中的哪个Topic
 }
 
 func GetConf(key string) (logEntryConf []*LogEntry, err error) {
