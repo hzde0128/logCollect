@@ -57,7 +57,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	etcdConfKey := fmt.Sprintf("%s_%s",cfg.EtcdConf.Key, ipStr)
+	etcdConfKey := fmt.Sprintf(cfg.EtcdConf.Key, ipStr)
 	// 2.1 从etcd中获取日志收集项的配置信息
 	logEntryConf, err := etcd.GetConf(etcdConfKey)
 	if err != nil {
