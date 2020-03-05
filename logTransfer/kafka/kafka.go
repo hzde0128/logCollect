@@ -2,6 +2,7 @@ package kafka
 
 import (
 	"fmt"
+	"logCollect/logTransfer/es"
 	"sync"
 
 	"github.com/Shopify/sarama"
@@ -38,6 +39,10 @@ func Init(addr []string, topic string) (err error) {
 			for msg := range cp.Messages() {
 				fmt.Printf("Partition:%d Offset:%d Key:%v Value:%v\n", msg.Partition, msg.Offset, msg.Key, string(msg.Value))
 				// 准备发送数据给es
+				ld := es.LogData{Topic: topic, Data: string(msg.Value)}
+				//es.SendToES(topic, ld) // 函数调用函数
+				// 优化一下: 直接放到一个chan中
+				es.SendToChan(&ld)
 			}
 		}(cp)
 		wg.Wait()

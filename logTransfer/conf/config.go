@@ -11,5 +11,7 @@ type KafkaConf struct {
 }
 
 type EsConf struct {
-	Address string `ini:"address"`
+	Address     string `ini:"address"`
+	MaxChanSize int    `ini:"max_chan_size"`
+	Nums        int    `ini:"nums"`
 }
