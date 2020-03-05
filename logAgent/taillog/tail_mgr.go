@@ -2,7 +2,7 @@ package taillog
 
 import (
 	"fmt"
-	"logAgent/etcd"
+	"logCollect/logAgent/etcd"
 	"time"
 )
 

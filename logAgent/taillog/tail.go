@@ -3,7 +3,7 @@ package taillog
 import (
 	"context"
 	"fmt"
-	"logAgent/kafka"
+	"logCollect/logAgent/kafka"
 
 	"github.com/hpcloud/tail"
 )

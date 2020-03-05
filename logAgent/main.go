@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"logAgent/conf"
-	"logAgent/etcd"
-	"logAgent/kafka"
-	"logAgent/taillog"
-	"logAgent/utils"
+	"logCollect/logAgent/conf"
+	"logCollect/logAgent/etcd"
+	"logCollect/logAgent/kafka"
+	"logCollect/logAgent/taillog"
+	"logCollect/logAgent/utils"
 	"sync"
 	"time"
 

@@ -1,8 +1,8 @@
 package utils
 
 import (
-"net"
-"strings"
+	"net"
+	"strings"
 )
 
 // GetOutboundIP 获取本地对外IP
