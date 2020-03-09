@@ -33,6 +33,10 @@
 
 - 实现日志入库到ES
 
+- 使用第三方日志框架logrus保存日志
+
+- 支持日志文件切割
+
 ## 配套教程
 
 [Go运维开发之日志收集（1）收集应用程序到kafka中](https://huangzhongde.cn/post/2020-03-03-golang_devops_logAgent_1_write_log_to_kafka/)
@@ -48,3 +52,5 @@
 [Go运维开发之日志收集（6）从kafka中获取日志信息](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_6_get_data_from_kafka/)
 
 [Go运维开发之日志收集（7）将日志入库到Elasticsearch并通过Kibana进行展示](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_7_write_to_es/)
+
+[Go运维开发之日志收集（8）将应用程序日志写入到文件中](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_8_with_logrus/)
