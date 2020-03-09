@@ -2,7 +2,7 @@ package es
 
 import (
 	"context"
-	"fmt"
+	"logCollect/logTransfer/logger"
 	"strings"
 	"time"
 
@@ -29,7 +29,7 @@ func Init(address string, maxChanSize, nums int) (err error) {
 		// Handle error
 		return err
 	}
-	fmt.Println("connect to es success")
+	logger.Log.Info("connect to es success")
 	ch = make(chan *LogData, maxChanSize)
 	for i := 0; i < nums; i++ {
 		go sendToEs()
@@ -53,10 +53,10 @@ func sendToEs() {
 				Do(context.Background())
 			if err != nil {
 				// Handle error
-				fmt.Println(err)
+				logger.Log.Warn(err)
 				continue
 			}
-			fmt.Printf("Indexed %s %v to index %s, type %s\n", msg.Topic, put1.Id, put1.Index, put1.Type)
+			logger.Log.Debugf("Indexed %s %v to index %s, type %s\n", msg.Topic, put1.Id, put1.Index, put1.Type)
 		default:
 			time.Sleep(time.Second)
 		}

@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"fmt"
+	"logCollect/logAgent/logger"
 	"time"
 
 	"github.com/Shopify/sarama"
@@ -28,7 +28,6 @@ func Init(addrs []string, maxSize int) (err error) {
 	// 连接kafka
 	client, err = sarama.NewSyncProducer(addrs, config)
 	if err != nil {
-		fmt.Println("producer closed, err:", err)
 		return
 	}
 	// 初始化logDataChan
@@ -59,10 +58,10 @@ func sendToKafka() {
 			// 发送到kafka
 			pid, offset, err := client.SendMessage(msg)
 			if err != nil {
-				fmt.Println("send msg failed, err:", err)
+				logger.Log.Warnf("send msg failed, err:", err)
 				return
 			}
-			fmt.Printf("pid:%v offset:%v\n", pid, offset)
+			logger.Log.Infof("pid:%v offset:%v\n", pid, offset)
 		default:
 			time.Sleep(time.Millisecond * 50)
 		}

@@ -13,7 +13,6 @@ func GetOutboundIP(addr string) (ip string, err error) {
 	}
 	defer conn.Close()
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
-	//fmt.Println(localAddr.String())
 	ip = strings.Split(localAddr.IP.String(), ":")[0]
 	return
 }
