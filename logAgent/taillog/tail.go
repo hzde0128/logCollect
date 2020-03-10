@@ -33,9 +33,10 @@ func NewTailTask(path, topic string) (tailObj *TailTask) {
 // 初始化一个TailTask实例
 func (t *TailTask) init() {
 	config := tail.Config{
-		ReOpen:    true,                                 // 重新打开
-		Follow:    true,                                 // 是否跟随
-		Location:  &tail.SeekInfo{Offset: 0, Whence: 2}, // 从文件的哪个地方开始读
+		ReOpen: true, // 重新打开
+		Follow: true, // 是否跟随
+		// Whence 0表示相对于文件的原点，1表示相对于当前偏移量，2表示相对于结束。
+		Location:  &tail.SeekInfo{Offset: 0, Whence: 1}, // 从文件的哪个地方开始读
 		MustExist: false,                                // 文件不存在不报错
 		Poll:      true,
 	}

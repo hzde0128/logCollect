@@ -7,7 +7,7 @@
 ---
 **说明**
 
-通过在运维平台上配置日志收集项，logAgent从etcd中获取要收集的日志信息从业务服务器读取日志信息，发往kafka，logTransfer负责从kafka读取日志，写入到Elasticsearch或者Prometheus，通过Kibana进行日志检索和Grafana进行可视化展示。
+通过在运维平台上配置日志收集项，logAgent从etcd中获取要收集的日志信息从业务服务器读取日志信息，发往kafka，logTransfer负责从kafka读取日志，写入到Elasticsearch中，通过Kibana进行日志检索。系统性能数据的收集有Node_Exporter进行采集，Prometheus拉取入库，将告警信息推给AlertManager，最后通过Grafana进行可视化展示。
 
 ---
 
@@ -38,6 +38,8 @@
 - 支持日志文件切割
 
 - 加入消费组，支持多个topic
+
+- tail包从上次读取的位置开始读
 
 ## 配套教程
 
