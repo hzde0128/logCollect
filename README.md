@@ -37,6 +37,8 @@
 
 - 支持日志文件切割
 
+- 加入消费组，支持多个topic
+
 ## 配套教程
 
 [Go运维开发之日志收集（1）收集应用程序到kafka中](https://huangzhongde.cn/post/2020-03-03-golang_devops_logAgent_1_write_log_to_kafka/)
@@ -54,3 +56,6 @@
 [Go运维开发之日志收集（7）将日志入库到Elasticsearch并通过Kibana进行展示](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_7_write_to_es/)
 
 [Go运维开发之日志收集（8）将应用程序日志写入到文件中](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_8_with_logrus/)
+
+[Go运维开发之日志收集（9）logTransfer支持多个Topic](https://huangzhongde.cn/post/2020-03-10-golang_devops_logAgent_9_kafka_consumer_group_multi_topics/)
+

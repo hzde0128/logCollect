@@ -37,7 +37,7 @@ func main() {
 	logger.Log.Debug("init es success.")
 
 	// 3.初始化kafka连接
-	err = kafka.Init([]string{cfg.KafkaConf.Address}, cfg.KafkaConf.Topic)
+	err = kafka.Init([]string{cfg.KafkaConf.Address}, cfg.KafkaConf.Topic, cfg.KafkaConf.Group)
 	if err != nil {
 		logger.Log.Errorf("init kafka failed, err:%v\n", err)
 		return

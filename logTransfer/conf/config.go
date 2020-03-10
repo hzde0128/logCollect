@@ -9,6 +9,7 @@ type AppConf struct {
 type KafkaConf struct {
 	Address string `ini:"address"`
 	Topic   string `ini:"topic"`
+	Group   string `ini:"group"`
 }
 
 type EsConf struct {
