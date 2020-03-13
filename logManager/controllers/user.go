@@ -14,6 +14,12 @@ type LoginController struct {
 
 // 登录页面
 func (c *LoginController) Get() {
+	// 获取Cookie
+	username := c.Ctx.GetCookie("username")
+	if username != "" {
+		c.Data["username"] = username
+		c.Data["check"] = "checked"
+	}
 	c.TplName = "login.tpl"
 }
 
@@ -23,7 +29,9 @@ func (c *LoginController) Post() {
 	// 1.获取用户输入的数据
 	userName := c.GetString("userName")
 	password := c.GetString("password")
-	beego.Info(userName, password)
+	// 检查是否记住用户名
+	remember := c.GetString("remember")
+	beego.Info(userName, password,remember)
 
 	// 2.数据处理
 	if userName == "" || password == "" {
@@ -54,8 +62,11 @@ func (c *LoginController) Post() {
 	}
 
 	// 设置Cookie
-	c.Ctx.SetCookie("username", userName, time.Second * 3600)
-
+	if remember == "on" {
+		c.Ctx.SetCookie("username", userName, 7 * 24 * time.Hour )
+	} else {
+		c.Ctx.SetCookie("username", userName, -1)
+	}
 	// 4.返回视图
 	c.Redirect("/admin/", http.StatusFound)
 }

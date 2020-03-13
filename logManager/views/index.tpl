@@ -2,11 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>后台管理页面</title>
+    <title>日志列表 - 日志收集系统</title>
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-
+    <script type="text/javascript">
+        window.onload = function () {
+            $(".dels").click(function () {
+                if(!confirm("是否删除?")){
+                    return false
+                }
+            })
+            $("#select").change(function () {
+                $("#form").submit()
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -37,13 +48,14 @@
         </div>
         <div class="pannel">
             <span class="sel_label">请选择主机：</span>
-            <select name="select" id="select" class="sel_opt">
-                <form>
+            <form id="form" method="post" action="/admin/">
+                <select name="select" id="select" class="sel_opt">
                     {{ range .server }}
                         <option selected="true">{{ .Address }}</option>
                     {{ end }}
-                </form>
-            </select>
+                </select>
+                <input type="submit" hidden="hidden">
+            </form>
 
             <table class="common_table">
                 <tr>

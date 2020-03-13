@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
+	"net/http"
 )
 
 type LogController struct {
@@ -35,21 +36,16 @@ func (c *LogController) Get(){
 	c.Data["collect"] = collects
 	c.Data["server"] = servers
 
-
-	//var collects []models.Collect
-	//
-	//// 获取分类信息
-	//table := o.QueryTable("Collect")
-	//var servers []models.Server
-	//_, err = table.All(&servers)
-	//if err != nil {
-	//	beego.Info("查询失败,err:", err)
-	//}
-	//
-	//qs.Limit(5, 0).RelatedSel("Server").All(&collects)
-
-	//c.Data["collect"] = collects
-	//c.Data["server"] = servers
-
 	c.TplName = "index.tpl"
+}
+
+func (c *LogController) Post() {
+	// 接收数据
+	address := c.GetString("select")
+	beego.Info("Address: ", address)
+	if address == "" {
+		beego.Info("下拉框传递数据失败")
+	}
+	// 获取分类信息
+	c.Redirect("/admin/", http.StatusFound)
 }

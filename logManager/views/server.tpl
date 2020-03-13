@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>编辑服务器</title>
+    <title>添加主机 - 日志收集系统</title>
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 </head>
