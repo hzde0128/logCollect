@@ -14,3 +14,7 @@ install:
   - cd logAgent && go build && cd -
   - cd logTransfer && go build && cd -
   - cd logManager && go build && cd -
+
+script:
+  - cd logTransfer && go test -v ./... && cd -
+  - cd logManager && go test -v ./... && cd -
