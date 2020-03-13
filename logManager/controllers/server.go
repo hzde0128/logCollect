@@ -4,7 +4,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
+	"math"
 	"net/http"
+	"strconv"
 )
 
 type ServerController struct {
@@ -24,8 +26,29 @@ func (c *ServerController) Get() {
 	if err != nil {
 		beego.Info("查询失败,err:", err)
 	}
+	pageSize := 5
+	query := o.QueryTable("Server")
+	count, err := query.Count()
 
+	// 获取页面数，向上取整
+	page , err := strconv.Atoi(c.GetString("page"))
+	if err != nil{
+		page = 1
+	}
+	start := pageSize * (page -1)
+
+	pageCount := int(math.Ceil(float64(count)/ float64(pageSize)))
+	table := o.QueryTable("Server")
+	table.Limit(pageSize, start).All(&servers)
+
+	c.Data["pageCount"] = pageCount
+	c.Data["count"] = count
+	c.Data["pagesize"] = pageSize
 	c.Data["server"] = servers
+	c.Data["prepage"] = 1
+	c.Data["page"] = page
+
+	c.Layout = "layout.tpl"
 	c.TplName = "server.tpl"
 }
 

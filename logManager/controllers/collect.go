@@ -24,6 +24,7 @@ func (c *CollectController) Get(){
 		c.Data["server"] = servers
 	}
 
+	c.Layout = "layout.tpl"
 	c.TplName = "collect.tpl"
 }
 

@@ -15,7 +15,6 @@ type LogController struct {
 
 // 获取日志列表
 func (c *LogController) Get(){
-
 	o := orm.NewOrm()
 
 	// 获取主机列表
@@ -60,6 +59,7 @@ func (c *LogController) Get(){
 	c.Data["prepage"] = 1
 	c.Data["page"] = page
 
+	c.Layout = "layout.tpl"
 	c.TplName = "index.tpl"
 }
 

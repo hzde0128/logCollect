@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"crypto/md5"
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
@@ -9,6 +11,10 @@ import (
 )
 
 type LoginController struct {
+	beego.Controller
+}
+
+type LogoutController struct {
 	beego.Controller
 }
 
@@ -55,7 +61,10 @@ func (c *LoginController) Post() {
 		c.TplName = "login.tpl"
 		return
 	}
-	if user.Password != password {
+	//md5验证
+	data := []byte(password)
+	has := md5.Sum(data)
+	if user.Password != fmt.Sprintf("%x", has){
 		beego.Info("用户名或密码错误")
 		c.TplName = "login.tpl"
 		return
@@ -67,6 +76,17 @@ func (c *LoginController) Post() {
 	} else {
 		c.Ctx.SetCookie("username", userName, -1)
 	}
+	// 设置session
+	c.SetSession("username", userName)
 	// 4.返回视图
 	c.Redirect("/admin/", http.StatusFound)
+}
+
+// 退出登录
+func (c *LogoutController) Get(){
+	// 1.删除session
+	c.DelSession("username")
+
+	// 2.跳转到登录页面
+	c.Redirect("/", http.StatusFound)
 }

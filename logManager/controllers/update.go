@@ -33,6 +33,8 @@ func (c *UpdateController) Get(){
 
 	// 显示内容
 	c.Data["collect"] = collect
+
+	c.Layout = "layout.tpl"
 	c.TplName = "update.tpl"
 }
 

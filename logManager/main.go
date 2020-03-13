@@ -1,11 +1,13 @@
 package main
 
 import (
+	"crypto/md5"
+	"fmt"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
-	_ "github.com/hzde0128/logCollect/logManager/routers"
 	_ "github.com/hzde0128/logCollect/logManager/models"
-	"github.com/astaxie/beego"
+	_ "github.com/hzde0128/logCollect/logManager/routers"
 )
 
 func main() {
@@ -24,9 +26,13 @@ func main() {
 	err := o.Read(&user, "username")
 	if err != nil{
 		beego.Info("用户admin不存在，添加用户")
-		user.Password = "admin"
+		// md5存放
+		data := []byte("admin")
+		has := md5.Sum(data)
+		user.Password = fmt.Sprintf("%x", has)
 		o.Insert(&user)
 	}
+
 
 	beego.Run()
 }
