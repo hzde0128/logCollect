@@ -37,19 +37,19 @@
             <h3 class="review_title">添加收集</h3>
                 <div class="form_group">
                     <label>主机选择：</label>
-                    <select class="sel_opt" name="category">
-
-                            <option>172.16.10.1</option>
-
+                    <select class="sel_opt" name="server">
+                        {{ range .server }}
+                            <option>{{ .Address }}</option>
+                        {{ end }}
                     </select>
                 </div>
             <div class="form_group">
                 <label>日志路径：</label>
-                <input type="text" class="input_txt2" name="articleName" >
+                <input type="text" class="input_txt2" name="filePath" >
             </div>
                 <div class="form_group">
                     <label>Topic：</label>
-                    <input type="text" class="input_txt2" name="articleName" >
+                    <input type="text" class="input_txt2" name="topic" >
                 </div>
 
             <div class="form_group indent_group line_top">

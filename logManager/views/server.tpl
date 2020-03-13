@@ -41,17 +41,17 @@
                     <th width="35%">主机地址</th>
                     <th width="20%">管理操作</th>
                 </tr>
-
+                {{ range $inx,$val := .server }}
                 <tr>
-                    <td>1</td>
-                    <td>测试服务器</td>
-                    <td>172.16.10.1</td>
+                    <td>{{ $val.Id }}</td>
+                    <td>{{ $val.Hostname }}</td>
+                    <td>{{ $val.Address }}</td>
                     <td><a href="javascript:;" class="edit">删除</a></td>
                 </tr>
-
+                {{ end }}
                 <tr>
                     <td colspan="4">
-                    <form action="/category" method="post">
+                    <form action="/admin/server/" method="post">
                         <input type="text" class="type_txt" placeholder="主机名称" name="ServerName">
                         <input type="text" class="type_txt" placeholder="主机地址" name="ServerAddress">
                         <input type="submit" class="addtype" value="添加主机">

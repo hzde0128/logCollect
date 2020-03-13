@@ -39,9 +39,9 @@
             <span class="sel_label">请选择主机：</span>
             <select name="select" id="select" class="sel_opt">
                 <form>
-
-                    <option selected="true">172.16.10.1</option>
-
+                    {{ range .server }}
+                        <option selected="true">{{ .Address }}</option>
+                    {{ end }}
                 </form>
             </select>
 
@@ -54,15 +54,16 @@
                     <th width="10%">Topic</th>
                     <th width="16%">主机地址</th>
                 </tr>
-
+                    {{ range .collect }}
                     <tr>
-                        <td> /var/log/nginx/access.log </td>
-                        <td> 2020-03-05 15:04:05</td>
+                        <td>{{ .Path }}</td>
+                        <td>{{ .CreateTime.Format "2006-01-02 13:04:05" }}</td>
                         <td><a href="#" class="dels">删除</a></td>
-                        <td><a href="/admin/colletc/1">编辑</a></td>
-                        <td>web_log</td>
-                        <th width="10%">172.16.10.1</th>
+                        <td><a href="/admin/colletc/{{ .Id }}">编辑</a></td>
+                        <td>{{ .Topic }}</td>
+                        <td>{{ .Server.Address }}</td>
                     </tr>
+                    {{ end }}
             </table>
 
             <ul class="pagenation">

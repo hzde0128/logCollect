@@ -16,10 +16,12 @@ func main() {
 
 	user := models.User{}
 	user.Username = "admin"
-	user.Password = "admin"
-	_, err := o.Insert(&user)
-	if err != nil {
-		beego.Info("插入数据失败")
+
+	err := o.Read(&user, "username")
+	if err != nil{
+		beego.Info("用户admin不存在，添加用户")
+		user.Password = "admin"
+		o.Insert(&user)
 	}
 
 	beego.Run()
