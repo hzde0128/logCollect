@@ -1,6 +1,6 @@
 # logCollect 日志收集服务
 
-[![Code Grade](https://www.code-inspector.com/project/4797/status/svg)](https://frontend.code-inspector.com/public/project/4797/logAgent/dashboard) [![Code Quality Score](https://www.code-inspector.com/project/4797/score/svg)](https://frontend.code-inspector.com/public/project/4797/logAgent/dashboard)
+[![travis-ci](https://travis-ci.com/hzde0128/logCollect.svg?branch=master)](https://travis-ci.com/github/hzde0128/logCollect) [![Code Grade](https://www.code-inspector.com/project/4797/status/svg)](https://frontend.code-inspector.com/public/project/4797/logAgent/dashboard) [![Code Quality Score](https://www.code-inspector.com/project/4797/score/svg)](https://frontend.code-inspector.com/public/project/4797/logAgent/dashboard)
 
 ## 软件架构
 

@@ -58,7 +58,7 @@ func sendToKafka() {
 			// 发送到kafka
 			pid, offset, err := client.SendMessage(msg)
 			if err != nil {
-				logger.Log.Warnf("send msg failed, err:", err)
+				logger.Log.Warnf("send msg failed, err:%v\n", err)
 				return
 			}
 			logger.Log.Infof("pid:%v offset:%v\n", pid, offset)

@@ -52,7 +52,7 @@ func main() {
 	// 为了实现每个logagent都拉取自己独有的配置，所以要以自己的IP地址作为区分
 	ipStr, err := utils.GetOutboundIP(cfg.CenterConf.Address)
 	if err != nil {
-		logger.Log.Error("get local addr failed, err:%v\n", err)
+		logger.Log.Errorf("get local addr failed, err:%v\n", err)
 		return
 	}
 	etcdConfKey := fmt.Sprintf(cfg.EtcdConf.Key, ipStr)
