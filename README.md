@@ -1,5 +1,7 @@
 # logCollect 日志收集服务
 
+![Code Grade](https://www.code-inspector.com/project/4797/status/svg) ![Code Quality Score](https://www.code-inspector.com/project/4797/score/svg)
+
 ## 软件架构
 
 ![architecture](images/architecture.jpg)
