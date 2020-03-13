@@ -41,6 +41,18 @@
 
 - tail包从上次读取的位置开始读
 
+## v0.4.0版本增加logManager服务
+
+logManager是有Beego框架搭建起来的web服务，主要是为了方便管理日志收集项
+
+- 从后台界面添加主机和日志收集项
+
+![logManager-login](images/logmanager_login.png)
+
+![logManager-dashboard](images/logmanager_dashboard.png)
+
+![logManager-host](images/logmanager_host.png)
+
 ## 配套教程
 
 [Go运维开发之日志收集（1）收集应用程序到kafka中](https://huangzhongde.cn/post/2020-03-03-golang_devops_logAgent_1_write_log_to_kafka/)
