@@ -14,7 +14,7 @@ type LogController struct {
 }
 
 // 获取日志列表
-func (c *LogController) Get(){
+func (c *LogController) Get() {
 	o := orm.NewOrm()
 
 	// 获取主机列表
@@ -36,19 +36,18 @@ func (c *LogController) Get(){
 	count, err := query.Count()
 
 	// 获取页面数，向上取整
-	page , err := strconv.Atoi(c.GetString("page"))
-	if err != nil{
+	page, err := strconv.Atoi(c.GetString("page"))
+	if err != nil {
 		page = 1
 	}
-	start := pageSize * (page -1)
+	start := pageSize * (page - 1)
 
-	pageCount := int(math.Ceil(float64(count)/ float64(pageSize)))
+	pageCount := int(math.Ceil(float64(count) / float64(pageSize)))
 
 	// 获取日志收集项
 	var collects []models.Collect
 	table := o.QueryTable("collect")
 	table.Limit(pageSize, start).RelatedSel("Server").All(&collects)
-
 
 	beego.Info("总数：", count)
 

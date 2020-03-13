@@ -24,7 +24,7 @@ func main() {
 	user.Username = "admin"
 
 	err := o.Read(&user, "username")
-	if err != nil{
+	if err != nil {
 		beego.Info("用户admin不存在，添加用户")
 		// md5存放
 		data := []byte("admin")
@@ -33,14 +33,13 @@ func main() {
 		o.Insert(&user)
 	}
 
-
 	beego.Run()
 }
 
-func prepage(idx int) (page int){
+func prepage(idx int) (page int) {
 	if idx > 1 {
 		page = idx - 1
-	} else{
+	} else {
 		page = idx
 	}
 	return

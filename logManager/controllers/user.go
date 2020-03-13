@@ -37,7 +37,7 @@ func (c *LoginController) Post() {
 	password := c.GetString("password")
 	// 检查是否记住用户名
 	remember := c.GetString("remember")
-	beego.Info(userName, password,remember)
+	beego.Info(userName, password, remember)
 
 	// 2.数据处理
 	if userName == "" || password == "" {
@@ -64,7 +64,7 @@ func (c *LoginController) Post() {
 	//md5验证
 	data := []byte(password)
 	has := md5.Sum(data)
-	if user.Password != fmt.Sprintf("%x", has){
+	if user.Password != fmt.Sprintf("%x", has) {
 		beego.Info("用户名或密码错误")
 		c.TplName = "login.tpl"
 		return
@@ -72,7 +72,7 @@ func (c *LoginController) Post() {
 
 	// 设置Cookie
 	if remember == "on" {
-		c.Ctx.SetCookie("username", userName, 7 * 24 * time.Hour )
+		c.Ctx.SetCookie("username", userName, 7*24*time.Hour)
 	} else {
 		c.Ctx.SetCookie("username", userName, -1)
 	}
@@ -83,7 +83,7 @@ func (c *LoginController) Post() {
 }
 
 // 退出登录
-func (c *LogoutController) Get(){
+func (c *LogoutController) Get() {
 	// 1.删除session
 	c.DelSession("username")
 

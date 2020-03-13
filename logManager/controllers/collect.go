@@ -11,7 +11,7 @@ type CollectController struct {
 	beego.Controller
 }
 
-func (c *CollectController) Get(){
+func (c *CollectController) Get() {
 	// 查询主机信息
 	o := orm.NewOrm()
 	qs := o.QueryTable("Server")
@@ -29,7 +29,7 @@ func (c *CollectController) Get(){
 }
 
 // 添加日志收集处理
-func (c *CollectController) Post(){
+func (c *CollectController) Post() {
 	// 处理用户发过来的请求
 	server := c.GetString("server")
 	filepath := c.GetString("filePath")
@@ -47,13 +47,12 @@ func (c *CollectController) Post(){
 	// 数据入库
 	o := orm.NewOrm()
 
-
 	var servers models.Server
 	collect := models.Collect{}
 
 	servers.Address = server
 	err := o.Read(&servers, "Address")
-	if err != nil{
+	if err != nil {
 		beego.Info("非法的服务器地址")
 		return
 	}
@@ -62,7 +61,7 @@ func (c *CollectController) Post(){
 	collect.Topic = topic
 
 	_, err = o.Insert(&collect)
-	if err != nil{
+	if err != nil {
 		beego.Info("添加失败,", err)
 		return
 	}

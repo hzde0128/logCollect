@@ -31,13 +31,13 @@ func (c *ServerController) Get() {
 	count, err := query.Count()
 
 	// 获取页面数，向上取整
-	page , err := strconv.Atoi(c.GetString("page"))
-	if err != nil{
+	page, err := strconv.Atoi(c.GetString("page"))
+	if err != nil {
 		page = 1
 	}
-	start := pageSize * (page -1)
+	start := pageSize * (page - 1)
 
-	pageCount := int(math.Ceil(float64(count)/ float64(pageSize)))
+	pageCount := int(math.Ceil(float64(count) / float64(pageSize)))
 	table := o.QueryTable("Server")
 	table.Limit(pageSize, start).All(&servers)
 
@@ -57,8 +57,8 @@ func (c *ServerController) Post() {
 	// 获取用户输入的数据
 	serverName := c.GetString("ServerName")
 	serverAddress := c.GetString("ServerAddress")
-	beego.Info("ServerName:",serverName)
-	beego.Info("ServerAddress:",serverAddress)
+	beego.Info("ServerName:", serverName)
+	beego.Info("ServerAddress:", serverAddress)
 
 	// 简单判断
 	if serverName == "" || serverAddress == "" {
