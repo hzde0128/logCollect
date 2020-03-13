@@ -2,8 +2,8 @@ package kafka
 
 import (
 	"context"
-	"logCollect/logTransfer/es"
-	"logCollect/logTransfer/logger"
+	"github.com/hzde0128/logCollect/logTransfer/es"
+	"github.com/hzde0128/logCollect/logTransfer/logger"
 	"os"
 	"os/signal"
 	"strings"

@@ -2,7 +2,7 @@ package es
 
 import (
 	"context"
-	"logCollect/logTransfer/logger"
+	"github.com/hzde0128/logCollect/logTransfer/logger"
 	"strings"
 	"time"
 

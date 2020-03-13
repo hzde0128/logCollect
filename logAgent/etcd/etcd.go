@@ -3,7 +3,7 @@ package etcd
 import (
 	"context"
 	"encoding/json"
-	"logCollect/logAgent/logger"
+	"github.com/hzde0128/logCollect/logAgent/logger"
 	"time"
 
 	"go.etcd.io/etcd/clientv3"

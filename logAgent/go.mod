@@ -1,4 +1,4 @@
-module logCollect/logAgent
+module github.com/hzde0128/logCollect/logAgent
 
 go 1.14
 

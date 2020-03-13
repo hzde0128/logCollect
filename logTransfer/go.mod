@@ -1,4 +1,4 @@
-module logCollect/logTransfer
+module github.com/hzde0128/logCollect/logTransfer
 
 go 1.14
 

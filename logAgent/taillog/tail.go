@@ -2,8 +2,8 @@ package taillog
 
 import (
 	"context"
-	"logCollect/logAgent/kafka"
-	"logCollect/logAgent/logger"
+	"github.com/hzde0128/logCollect/logAgent/kafka"
+	"github.com/hzde0128/logCollect/logAgent/logger"
 
 	"github.com/hpcloud/tail"
 )

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"logCollect/logTransfer/conf"
-	"logCollect/logTransfer/es"
-	"logCollect/logTransfer/kafka"
-	"logCollect/logTransfer/logger"
+	"github.com/hzde0128/logCollect/logTransfer/conf"
+	"github.com/hzde0128/logCollect/logTransfer/es"
+	"github.com/hzde0128/logCollect/logTransfer/kafka"
+	"github.com/hzde0128/logCollect/logTransfer/logger"
 	"path"
 	"time"
 

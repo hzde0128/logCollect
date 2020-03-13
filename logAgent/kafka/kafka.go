@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"logCollect/logAgent/logger"
+	"github.com/hzde0128/logCollect/logAgent/logger"
 	"time"
 
 	"github.com/Shopify/sarama"

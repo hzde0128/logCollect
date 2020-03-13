@@ -2,8 +2,8 @@ package taillog
 
 import (
 	"fmt"
-	"logCollect/logAgent/etcd"
-	"logCollect/logAgent/logger"
+	"github.com/hzde0128/logCollect/logAgent/etcd"
+	"github.com/hzde0128/logCollect/logAgent/logger"
 	"time"
 )
 

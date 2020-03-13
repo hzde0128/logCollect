@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"logCollect/logAgent/conf"
-	"logCollect/logAgent/etcd"
-	"logCollect/logAgent/kafka"
-	"logCollect/logAgent/logger"
-	"logCollect/logAgent/taillog"
-	"logCollect/logAgent/utils"
+	"github.com/hzde0128/logCollect/logAgent/conf"
+	"github.com/hzde0128/logCollect/logAgent/etcd"
+	"github.com/hzde0128/logCollect/logAgent/kafka"
+	"github.com/hzde0128/logCollect/logAgent/logger"
+	"github.com/hzde0128/logCollect/logAgent/taillog"
+	"github.com/hzde0128/logCollect/logAgent/utils"
 	"path"
 	"sync"
 	"time"
