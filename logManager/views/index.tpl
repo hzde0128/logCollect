@@ -71,7 +71,7 @@
                         <td>{{ .Path }}</td>
                         <td>{{ .CreateTime.Format "2006-01-02 13:04:05" }}</td>
                         <td><a href="#" class="dels">删除</a></td>
-                        <td><a href="/admin/colletc/{{ .Id }}">编辑</a></td>
+                        <td><a href="/admin/collect/{{ .Id }}">编辑</a></td>
                         <td>{{ .Topic }}</td>
                         <td>{{ .Server.Address }}</td>
                     </tr>
@@ -80,10 +80,10 @@
 
             <ul class="pagenation">
                 <li><a href="/admin/">首页</a></li>
-{{/*                <li><a href="/article?pageIndex={{.pageIndex | ShowPrePage }}">上一页 </a> </li>*/}}
-{{/*                <li> <a href="/article?pageIndex={{ ShowNextPage .pageIndex .pageCount }}">下一页</a></li>*/}}
-{{/*                <li><a href="/article?pageIndex={{.pageCount}}">末页</a></li>*/}}
-{{/*                <li>共{{.count}}条记录/共{{.pageCount}}页/当前{{.pageIndex}}页</li>*/}}
+                <li><a href="/admin/?page={{ .page | prepage }}">上一页 </a> </li>
+                <li> <a href="/admin/?page={{ nextpage .page .pageCount }}">下一页</a></li>
+                <li><a href="/admin/?page={{.pageCount}}">末页</a></li>
+                <li>共{{ .count }}条记录/共{{ .pageCount }}页/当前{{ .page }}页</li>
             </ul>
         </div>
     </div>

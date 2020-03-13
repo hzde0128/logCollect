@@ -47,6 +47,8 @@ logManager是有Beego框架搭建起来的web服务，主要是为了方便管�
 
 - 从后台界面添加主机和日志收集项
 
+- Cookie实现
+
 ![logManager-login](images/logmanager_login.png)
 
 ![logManager-dashboard](images/logmanager_dashboard.png)

@@ -4,7 +4,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
+	"math"
 	"net/http"
+	"strconv"
 )
 
 type LogController struct {
@@ -28,13 +30,35 @@ func (c *LogController) Get(){
 		beego.Info("查询失败,err:", err)
 	}
 
+	// 分页设置
+	pageSize := 8
+
+	query := o.QueryTable("collect")
+	count, err := query.Count()
+
+	// 获取页面数，向上取整
+	page , err := strconv.Atoi(c.GetString("page"))
+	if err != nil{
+		page = 1
+	}
+	start := pageSize * (page -1)
+
+	pageCount := int(math.Ceil(float64(count)/ float64(pageSize)))
+
 	// 获取日志收集项
 	var collects []models.Collect
 	table := o.QueryTable("collect")
-	table.Limit(5, 0).RelatedSel("Server").All(&collects)
+	table.Limit(pageSize, start).RelatedSel("Server").All(&collects)
 
+
+	beego.Info("总数：", count)
+
+	c.Data["pageCount"] = pageCount
+	c.Data["count"] = count
 	c.Data["collect"] = collects
 	c.Data["server"] = servers
+	c.Data["prepage"] = 1
+	c.Data["page"] = page
 
 	c.TplName = "index.tpl"
 }

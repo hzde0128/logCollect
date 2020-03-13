@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
+	// 上一页/下一页
+	beego.AddFuncMap("prepage", prepage)
+	beego.AddFuncMap("nextpage", nextpage)
+
 	orm.Debug = true
 
 	// 初始化一个管理用户
@@ -27,3 +31,20 @@ func main() {
 	beego.Run()
 }
 
+func prepage(idx int) (page int){
+	if idx > 1 {
+		page = idx - 1
+	} else{
+		page = idx
+	}
+	return
+}
+
+func nextpage(idx, count int) (page int) {
+	if idx < count {
+		page = idx + 1
+	} else {
+		page = count
+	}
+	return
+}
