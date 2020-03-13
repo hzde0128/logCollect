@@ -1,10 +1,13 @@
 package routers
 
 import (
-	"logCollect/logManager/controllers"
+	"github.com/hzde0128/logCollect/logManager/controllers"
 	"github.com/astaxie/beego"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+    beego.Router("/", &controllers.LoginController{})
+	beego.Router("/admin/", &controllers.LogController{})
+	beego.Router("/admin/collect/", &controllers.CollectController{})
+	beego.Router("/admin/server/", &controllers.ServerController{})
 }
