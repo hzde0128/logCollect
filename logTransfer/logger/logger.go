@@ -3,6 +3,7 @@ package logger
 import (
 	"os"
 	"path"
+	"path/filepath"
 	"time"
 
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
@@ -10,24 +11,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var Log = logrus.New()
+var (
+	// Log 全局日志
+	Log = logrus.New()
+)
 
-func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
-	// The API for setting attributes is a little different than the package level
-	// exported logger. See Godoc.
-	Log.Out = os.Stdout
-	// 判断目录是否存在，不存在则创建
-	dir, _ := path.Split(logfile)
-	if _, err = os.Stat(dir); os.IsNotExist(err) {
-		err = os.MkdirAll(dir, 0755)
-		if err != nil {
-			Log.Warnf("create directory failed, err:%v\n", err)
-		}
-	}
-
-	// 设置日志输出格式
-	Log.SetFormatter(&logrus.JSONFormatter{})
-	var level logrus.Level
+// logLevel 设置日志等级
+func logLevel(loglevel string) (level logrus.Level) {
 	switch loglevel {
 	case "trace":
 		level = logrus.TraceLevel
@@ -46,15 +36,50 @@ func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
 	default:
 		level = logrus.InfoLevel
 	}
-	Log.SetLevel(level)
-	//Log.Out = os.Stdout
+	return
+}
+
+// 创建目录
+func mkDir(logfile string) (logpath string, err error) {
+	logpath, err = filepath.Abs(logfile)
+	if err != nil {
+		return
+	}
+	dir, _ := path.Split(logpath)
+	if _, err = os.Stat(dir); os.IsNotExist(err) {
+		err = os.MkdirAll(dir, 0755)
+		if err != nil {
+			return
+		}
+	}
+	return
+}
+
+// Init 日志初始化
+func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
+	// The API for setting attributes is a little different than the package level
+	// exported logger. See Godoc.
+	Log.Out = os.Stdout
+	
+	// 判断目录是否存在，不存在则创建
+	logpath, err := mkDir(logfile)
+	if err != nil {
+		Log.Errorf("创建目录失败, err:%v\n", err)
+		return
+	}
+
+	// 设置日志输出格式
+	Log.SetFormatter(&logrus.JSONFormatter{})
+
+	// 获取日志级别
+	Log.SetLevel(logLevel(loglevel))
 
 	writer, err := rotatelogs.New(
 		// 分割后的文件名称
-		logfile+".%Y%m%d.log",
+		logpath+".%Y%m%d.log",
 		// 生成软链，指向最新日志文件
-		rotatelogs.WithLinkName(logfile),
-		// 设置最大保存时间(7天)
+		rotatelogs.WithLinkName(logpath),
+		// 设置最大保存时间
 		rotatelogs.WithMaxAge(maxAge),
 		// 设置日志切割时间间隔(1天)
 		rotatelogs.WithRotationTime(24*time.Hour),
@@ -76,8 +101,8 @@ func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
 	// 新增 Hook
 	Log.AddHook(lfHook)
 
-	// You could set this to any `io.Writer` such as a file
-	file, err := os.OpenFile(logfile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	// 日志输出到文件
+	file, err := os.OpenFile(logpath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		return
 	}
