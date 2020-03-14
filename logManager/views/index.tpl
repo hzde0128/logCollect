@@ -26,8 +26,8 @@
                     {{ range .collect }}
                     <tr>
                         <td>{{ .Path }}</td>
-                        <td>{{ .CreateTime.Format "2006-01-02 13:04:05" }}</td>
-                        <td><a href="#" class="dels">删除</a></td>
+                        <td>{{ .CreateTime.Format "2006-01-02 15:04:05" }}</td>
+                        <td><a href="/admin/collect/delete?id={{ .Id }}" class="dels">删除</a></td>
                         <td><a href="/admin/collect/{{ .Id }}">编辑</a></td>
                         <td>{{ .Topic }}</td>
                         <td>{{ .Server.Address }}</td>
