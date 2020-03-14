@@ -16,7 +16,7 @@
                     <td>{{ $val.Id }}</td>
                     <td>{{ $val.Hostname }}</td>
                     <td>{{ $val.Address }}</td>
-                    <td><a href="javascript:;" class="edit">删除</a></td>
+                    <td><a href="/admin/server/delete?id={{ $val.Id }}" class="dels">删除</a></td>
                 </tr>
                 {{ end }}
                 <tr>

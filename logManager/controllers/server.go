@@ -1,15 +1,20 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
-	"github.com/hzde0128/logCollect/logManager/models"
 	"math"
 	"net/http"
 	"strconv"
+
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
+	"github.com/hzde0128/logCollect/logManager/models"
 )
 
 type ServerController struct {
+	beego.Controller
+}
+
+type DeleteSvrController struct {
 	beego.Controller
 }
 
@@ -78,5 +83,27 @@ func (c *ServerController) Post() {
 		beego.Info("添加失败")
 	}
 	// 跳转到主机列表页
+	c.Redirect("/admin/server/", http.StatusFound)
+}
+
+// 删除主机
+func (c *DeleteSvrController) Get() {
+	// 获取用户输入的ID
+	id, err := c.GetInt("id")
+	if err != nil {
+		beego.Info("数据非法")
+		return
+	}
+	beego.Info("获取到的ID：", id)
+
+	// 执行删除操作
+	o := orm.NewOrm()
+	server := models.Server{Id: id}
+	_, err = o.Delete(&server)
+	if err != nil {
+		beego.Info("删除失败，", err)
+		return
+	}
+
 	c.Redirect("/admin/server/", http.StatusFound)
 }

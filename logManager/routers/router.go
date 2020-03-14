@@ -17,6 +17,7 @@ func init() {
 	beego.Router("/admin/collect/delete", &controllers.DeleteController{})
 	beego.Router("/admin/collect/?:id", &controllers.UpdateController{})
 	beego.Router("/admin/server/", &controllers.ServerController{})
+	beego.Router("/admin/server/delete", &controllers.DeleteSvrController{})
 }
 
 var filterFunc = func(ctx *context.Context) {
