@@ -41,6 +41,10 @@ func (c *LogController) Get() {
 
 	query := o.QueryTable("collect")
 	count, err := query.Count()
+	if err != nil {
+		beego.Info("查询失败,", err)
+		return
+	}
 
 	// 获取页面数，向上取整
 	page, err := strconv.Atoi(c.GetString("page"))

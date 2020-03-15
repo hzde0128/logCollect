@@ -37,6 +37,10 @@ func (c *ServerController) Get() {
 	pageSize := 5
 	query := o.QueryTable("Server")
 	count, err := query.Count()
+	if err != nil {
+		beego.Info("查询失败,", err)
+		return
+	}
 
 	// 获取页面数，向上取整
 	page, err := strconv.Atoi(c.GetString("page"))
