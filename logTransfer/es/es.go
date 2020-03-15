@@ -9,6 +9,7 @@ import (
 	"github.com/olivere/elastic/v7"
 )
 
+// LogData 日志结构体
 type LogData struct {
 	Topic string `json:"topic"`
 	Data  string `json:"data"`
@@ -37,6 +38,7 @@ func Init(address string, maxChanSize, nums int) (err error) {
 	return
 }
 
+// SendToChan 发送到通道
 func SendToChan(msg *LogData) {
 	ch <- msg
 }
