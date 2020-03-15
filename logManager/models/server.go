@@ -1,5 +1,6 @@
 package models
 
+// Server 主机表
 type Server struct {
 	Id       int
 	Hostname string     `orm:"unique"` // 主机名称

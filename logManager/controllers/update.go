@@ -1,18 +1,20 @@
 package controllers
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
-	"net/http"
-	"strconv"
 )
 
+// UpdateController 更新
 type UpdateController struct {
 	beego.Controller
 }
 
-// 修改日志收集项
+// Get 修改日志收集项
 func (c *UpdateController) Get() {
 	// 从数据库获取当前的信息
 	id, _ := strconv.Atoi(c.Ctx.Input.Param(":id"))
@@ -37,7 +39,7 @@ func (c *UpdateController) Get() {
 	c.TplName = "update.tpl"
 }
 
-// 处理修改日志收集项
+// Post 处理修改日志收集项
 func (c *UpdateController) Post() {
 	server := c.GetString("server")
 	path := c.GetString("path")

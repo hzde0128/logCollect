@@ -37,7 +37,7 @@ func Init(addrs []string, maxSize int) (err error) {
 	return
 }
 
-// 给外部暴露的一个函数，该函数只把日志数据发送到一个内部的channel中
+// SendToChan 给外部暴露的一个函数，该函数只把日志数据发送到一个内部的channel中
 func SendToChan(topic, data string) {
 	msg := &logData{
 		topic: topic,
@@ -46,7 +46,7 @@ func SendToChan(topic, data string) {
 	logDataChan <- msg
 }
 
-// 真正往kafka发送日志的函数
+// sendToKafka 真正往kafka发送日志的函数
 func sendToKafka() {
 	for {
 		select {
@@ -65,7 +65,5 @@ func sendToKafka() {
 		default:
 			time.Sleep(time.Millisecond * 50)
 		}
-
 	}
-
 }

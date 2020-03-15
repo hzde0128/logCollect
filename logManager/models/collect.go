@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// Collect 日志收集表
 type Collect struct {
 	Id         int
 	Path       string    // 日志文件路径

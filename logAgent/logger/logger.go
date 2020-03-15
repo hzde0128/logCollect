@@ -39,7 +39,7 @@ func logLevel(loglevel string) (level logrus.Level) {
 	return
 }
 
-// 创建目录
+// mkDir 创建目录
 func mkDir(logfile string) (logpath string, err error) {
 	logpath, err = filepath.Abs(logfile)
 	if err != nil {
@@ -60,7 +60,7 @@ func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
 	// The API for setting attributes is a little different than the package level
 	// exported logger. See Godoc.
 	Log.Out = os.Stdout
-	
+
 	// 判断目录是否存在，不存在则创建
 	logpath, err := mkDir(logfile)
 	if err != nil {

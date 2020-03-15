@@ -15,6 +15,7 @@ type tailLogMgr struct {
 	newConfChan chan []*etcd.LogEntry // 获取新的配置的通道
 }
 
+// Init 初始化
 func Init(logEntryConf []*etcd.LogEntry) {
 	taskMgr = &tailLogMgr{
 		logEntry:    logEntryConf, // 把当前的日志收集项配置信息保存起来
@@ -75,7 +76,7 @@ func (t *tailLogMgr) run() {
 	}
 }
 
-// 一个函数，向外暴露taskMgr的newConfChan
+// NewConfChan 一个函数，向外暴露taskMgr的newConfChan
 func NewConfChan() chan<- []*etcd.LogEntry {
 	return taskMgr.newConfChan
 }

@@ -2,13 +2,14 @@ package taillog
 
 import (
 	"context"
+
 	"github.com/hzde0128/logCollect/logAgent/kafka"
 	"github.com/hzde0128/logCollect/logAgent/logger"
 
 	"github.com/hpcloud/tail"
 )
 
-// TailTask： 一个日志收集的任务
+// TailTask 一个日志收集的任务
 type TailTask struct {
 	path     string
 	topic    string
@@ -18,6 +19,7 @@ type TailTask struct {
 	cancelFunc context.CancelFunc
 }
 
+// NewTailTask 新建task
 func NewTailTask(path, topic string) (tailObj *TailTask) {
 	ctx, cancel := context.WithCancel(context.Background())
 	tailObj = &TailTask{

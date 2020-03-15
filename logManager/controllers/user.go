@@ -3,22 +3,25 @@ package controllers
 import (
 	"crypto/md5"
 	"fmt"
+	"net/http"
+	"time"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
-	"net/http"
-	"time"
 )
 
+// LoginController 登录
 type LoginController struct {
 	beego.Controller
 }
 
+// LogoutController 登出
 type LogoutController struct {
 	beego.Controller
 }
 
-// 登录页面
+// Get 登录页面
 func (c *LoginController) Get() {
 	// 获取Cookie
 	username := c.Ctx.GetCookie("username")
@@ -29,7 +32,7 @@ func (c *LoginController) Get() {
 	c.TplName = "login.tpl"
 }
 
-// 登录处理页面
+// Post 登录处理页面
 func (c *LoginController) Post() {
 	// 处理登录请求
 	// 1.获取用户输入的数据
@@ -82,7 +85,7 @@ func (c *LoginController) Post() {
 	c.Redirect("/admin/", http.StatusFound)
 }
 
-// 退出登录
+// Get 退出登录
 func (c *LogoutController) Get() {
 	// 1.删除session
 	c.DelSession("username")

@@ -10,14 +10,17 @@ import (
 	"github.com/hzde0128/logCollect/logManager/models"
 )
 
+// ServerController 主机结构体
 type ServerController struct {
 	beego.Controller
 }
 
+// DeleteSvrController 删除主机
 type DeleteSvrController struct {
 	beego.Controller
 }
 
+// Get 显示主机列表
 func (c *ServerController) Get() {
 	// 显示主机列表
 	o := orm.NewOrm()
@@ -57,7 +60,7 @@ func (c *ServerController) Get() {
 	c.TplName = "server.tpl"
 }
 
-// 添加主机
+// Post 添加主机
 func (c *ServerController) Post() {
 	// 获取用户输入的数据
 	serverName := c.GetString("ServerName")
@@ -86,7 +89,7 @@ func (c *ServerController) Post() {
 	c.Redirect("/admin/server/", http.StatusFound)
 }
 
-// 删除主机
+// Get 删除主机
 func (c *DeleteSvrController) Get() {
 	// 获取用户输入的ID
 	id, err := c.GetInt("id")

@@ -10,15 +10,17 @@ import (
 	"github.com/hzde0128/logCollect/logManager/models"
 )
 
+// LogController 日志
 type LogController struct {
 	beego.Controller
 }
 
+// DeleteController 删除日志
 type DeleteController struct {
 	beego.Controller
 }
 
-// 获取日志列表
+// Get 获取日志列表
 func (c *LogController) Get() {
 	o := orm.NewOrm()
 
@@ -67,6 +69,7 @@ func (c *LogController) Get() {
 	c.TplName = "index.tpl"
 }
 
+// Post 日志处理
 func (c *LogController) Post() {
 	// 接收数据
 	address := c.GetString("select")
@@ -78,7 +81,7 @@ func (c *LogController) Post() {
 	c.Redirect("/admin/", http.StatusFound)
 }
 
-// 删除日志收集项
+// Get 删除日志收集项
 func (c *DeleteController) Get() {
 	// 获取用户输入的ID
 	id, err := c.GetInt("id")

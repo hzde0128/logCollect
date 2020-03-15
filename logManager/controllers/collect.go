@@ -7,10 +7,12 @@ import (
 	"net/http"
 )
 
+// CollectController 日志收集
 type CollectController struct {
 	beego.Controller
 }
 
+// Get 日志收集列表展示
 func (c *CollectController) Get() {
 	// 查询主机信息
 	o := orm.NewOrm()
@@ -28,7 +30,7 @@ func (c *CollectController) Get() {
 	c.TplName = "collect.tpl"
 }
 
-// 添加日志收集处理
+// Post 添加日志收集处理
 func (c *CollectController) Post() {
 	// 处理用户发过来的请求
 	server := c.GetString("server")

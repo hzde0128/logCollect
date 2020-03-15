@@ -36,6 +36,7 @@ func main() {
 	beego.Run()
 }
 
+// prepage 上一页
 func prepage(idx int) (page int) {
 	if idx > 1 {
 		page = idx - 1
@@ -45,6 +46,7 @@ func prepage(idx int) (page int) {
 	return
 }
 
+// nextpage 下一页
 func nextpage(idx, count int) (page int) {
 	if idx < count {
 		page = idx + 1

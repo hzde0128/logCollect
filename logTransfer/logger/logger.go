@@ -60,7 +60,7 @@ func Init(logfile, loglevel string, maxAge time.Duration) (err error) {
 	// The API for setting attributes is a little different than the package level
 	// exported logger. See Godoc.
 	Log.Out = os.Stdout
-	
+
 	// 判断目录是否存在，不存在则创建
 	logpath, err := mkDir(logfile)
 	if err != nil {

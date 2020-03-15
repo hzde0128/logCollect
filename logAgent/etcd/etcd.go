@@ -13,12 +13,13 @@ var (
 	client *clientv3.Client
 )
 
-// 需要收集的日志的配置信息
+// LogEntry 需要收集的日志的配置信息
 type LogEntry struct {
 	Path  string `json:"path"`  // 日志存放的路径
 	Topic string `json:"topic"` // 日志要发往Kafka中的哪个Topic
 }
 
+// Init 初始化函数
 func Init(addrs string, timeout time.Duration) (err error) {
 	client, err = clientv3.New(clientv3.Config{
 		Endpoints:   []string{addrs},
@@ -29,6 +30,7 @@ func Init(addrs string, timeout time.Duration) (err error) {
 	return
 }
 
+// GetConf 获取配置信息
 func GetConf(key string) (logEntryConf []*LogEntry, err error) {
 	// get
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
