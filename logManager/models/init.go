@@ -1,16 +1,19 @@
 package models
 
 import (
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	//_ "github.com/mattn/go-sqlite3"
+	"github.com/hzde0128/logCollect/logManager/utils"
+
 	_ "github.com/go-sql-driver/mysql"
 	"time"
 )
 
 func init() {
 	orm.DefaultTimeLoc = time.Local
-	//orm.RegisterDataBase("default", "sqlite3", "logmanager.db")
-	orm.RegisterDataBase("default", "mysql", "root:root@tcp(127.0.0.1:3306)/logcollect?charset=utf8")
+	dsn := utils.GMysqlUser + ":" + utils.GMysqlPass + "@tcp(" + utils.GMysqlHost + ":" + utils.GMysqlPort + ")/" + utils.GMysqlDb
+	beego.Info("dsn:", dsn)
+	orm.RegisterDataBase("default", "mysql", dsn+"?charset=utf8")
 	orm.RegisterModel(new(User), new(Server), new(Collect))
 	orm.RunSyncdb("default", false, false)
 }

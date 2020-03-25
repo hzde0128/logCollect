@@ -55,7 +55,7 @@ func (c *CollectController) Post() {
 	servers.Address = server
 	err := o.Read(&servers, "Address")
 	if err != nil {
-		beego.Info("非法的服务器地址")
+		beego.Info("非法的服务器地址", err)
 		return
 	}
 	collect.Server = &servers

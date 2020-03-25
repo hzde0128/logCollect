@@ -3,6 +3,7 @@ package controllers
 import (
 	"crypto/md5"
 	"fmt"
+	"github.com/hzde0128/logCollect/logManager/utils"
 	"net/http"
 	"time"
 
@@ -83,6 +84,19 @@ func (c *LoginController) Post() {
 	c.SetSession("username", userName)
 	// 4.返回视图
 	c.Redirect("/admin/", http.StatusFound)
+
+	// 创建sessionId
+	sessionId := utils.Md5String(userName)
+	// 将用户信息加入redis中
+	bm, err := utils.RedisConn()
+	if err != nil {
+		beego.Info("Redis连接失败", err)
+	}
+	// session保留10分钟
+	err = bm.Put(sessionId, userName, time.Second*600)
+	if err != nil {
+		beego.Info("存入redis失败", err)
+	}
 }
 
 // Get 退出登录
