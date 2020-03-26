@@ -19,6 +19,8 @@ var (
 	GRedisHost  string // redis地址
 	GRedisPort  string // redis端口
 	GRedisDb    string // redis库
+	GEtcdHost   string // etcd地址
+	GEtcdPort   string // etcd端口
 )
 
 func initConfig() {
@@ -36,6 +38,8 @@ func initConfig() {
 	GRedisHost = appconf.String("redis_host")
 	GRedisPort = appconf.String("redis_port")
 	GRedisDb = appconf.String("redis_db")
+	GEtcdHost = appconf.String("etcd_host")
+	GEtcdPort = appconf.String("etcd_port")
 
 	return
 }

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/hzde0128/logCollect/logManager/utils"
 	"math"
 	"net/http"
 	"strconv"
@@ -95,8 +96,13 @@ func (c *DeleteController) Get() {
 	}
 	beego.Info("获取到的ID：", id)
 
-	// 执行删除操作
 	o := orm.NewOrm()
+	// 获取对应的主机
+	server := models.Server{}
+	o.Raw("SELECT address FROM server WHERE id = (SELECT server_id FROM collect WHERE id = ?)", id).QueryRow(&server)
+
+	beego.Info(server)
+	// 执行删除操作
 	collect := models.Collect{Id: id}
 	_, err = o.Delete(&collect)
 	if err != nil {
@@ -104,6 +110,14 @@ func (c *DeleteController) Get() {
 		return
 	}
 
+	// 拼接key
+	key := "/logagent/" + server.Address + "/collect"
+	//// 同时删除etcd配置
+	_, err = utils.DelConf(key)
+	if err != nil {
+		beego.Info("删除失败", err)
+	}
+	beego.Info("删除成功")
 	// 跳转到日志列表页
 	c.Redirect("/admin/", http.StatusFound)
 }

@@ -59,13 +59,15 @@ logManager是有Beego框架搭建起来的web服务，主要是为了方便管�
 
 - 使用redis进行缓存
 
-- 功能完善
+- 实现从logManager进行添加/删除/修改日志收集项
+
+- logAgent获取logManager界面增删改的收集项
 
 ## 开发计划
 
 - [x] logManager使用redis进行缓存
 
-- [ ] logManager添加收集项之后将配置发给etcd
+- [x] logManager添加收集项之后将配置发给etcd
 
 - [x] logAgent从etcd获取到收集项进行收集并监听变更
 

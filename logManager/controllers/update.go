@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"encoding/json"
+	"github.com/hzde0128/logCollect/logManager/utils"
 	"net/http"
 	"strconv"
 
@@ -69,5 +71,22 @@ func (c *UpdateController) Post() {
 		beego.Info("修改失败,", err)
 		return
 	}
+
+	// 更新etcd
+	key := "/logagent/" + server + "/collect"
+	var conf = LogEntry{
+		Path:  path,
+		Topic: topic,
+	}
+
+	// 转化为json
+	val, _ := json.Marshal(conf)
+	beego.Info(string(val))
+	_, err = utils.PutConf(key, "["+string(val)+"]")
+	if err != nil {
+		beego.Info("推送到etcd失败", err)
+	}
+	beego.Info("成功推送到etcd")
+
 	c.Redirect("/admin/", http.StatusFound)
 }

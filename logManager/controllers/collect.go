@@ -1,15 +1,23 @@
 package controllers
 
 import (
+	"encoding/json"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/models"
+	"github.com/hzde0128/logCollect/logManager/utils"
 	"net/http"
 )
 
 // CollectController 日志收集
 type CollectController struct {
 	beego.Controller
+}
+
+// LogEntry 需要收集的日志的配置信息
+type LogEntry struct {
+	Path  string `json:"path"`  // 日志存放的路径
+	Topic string `json:"topic"` // 日志要发往Kafka中的哪个Topic
 }
 
 // Get 日志收集列表展示
@@ -67,6 +75,21 @@ func (c *CollectController) Post() {
 		beego.Info("添加失败,", err)
 		return
 	}
+
+	key := "/logagent/" + server + "/collect"
+	var conf = LogEntry{
+		Path:  filepath,
+		Topic: topic,
+	}
+
+	// 转化为json
+	val, _ := json.Marshal(conf)
+	beego.Info(string(val))
+	_, err = utils.PutConf(key, "["+string(val)+"]")
+	if err != nil {
+		beego.Info("推送到etcd失败", err)
+	}
+	beego.Info("成功推送到etcd")
 
 	c.Redirect("/admin/", http.StatusFound)
 }
