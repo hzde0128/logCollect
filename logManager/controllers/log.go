@@ -103,7 +103,7 @@ func (c *DeleteController) Get() {
 
 	beego.Info(server)
 	// 执行删除操作
-	collect := models.Collect{Id: id}
+	collect := models.Collect{ID: id}
 	_, err = o.Delete(&collect)
 	if err != nil {
 		beego.Info("删除失败，", err)

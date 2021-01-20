@@ -25,7 +25,7 @@ func (c *UpdateController) Get() {
 	// 验证id是否非法
 	o := orm.NewOrm()
 	collect := models.Collect{}
-	collect.Id = id
+	collect.ID = id
 	err := o.Read(&collect, "id")
 	if err != nil {
 		beego.Info("无效的ID", err)
@@ -64,7 +64,7 @@ func (c *UpdateController) Post() {
 	collect.Topic = topic
 	collect.Path = path
 	collect.Server = &servers
-	collect.Id = id
+	collect.ID = id
 
 	_, err = o.Update(&collect)
 	if err != nil {

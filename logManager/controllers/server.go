@@ -105,7 +105,7 @@ func (c *DeleteSvrController) Get() {
 
 	// 执行删除操作
 	o := orm.NewOrm()
-	server := models.Server{Id: id}
+	server := models.Server{ID: id}
 	_, err = o.Delete(&server)
 	if err != nil {
 		beego.Info("删除失败，", err)

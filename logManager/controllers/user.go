@@ -86,14 +86,14 @@ func (c *LoginController) Post() {
 	c.Redirect("/admin/", http.StatusFound)
 
 	// 创建sessionId
-	sessionId := utils.Md5String(userName)
+	sessionID := utils.Md5String(userName)
 	// 将用户信息加入redis中
 	bm, err := utils.RedisConn()
 	if err != nil {
 		beego.Info("Redis连接失败", err)
 	}
 	// session保留10分钟
-	err = bm.Put(sessionId, userName, time.Second*600)
+	err = bm.Put(sessionID, userName, time.Second*600)
 	if err != nil {
 		beego.Info("存入redis失败", err)
 	}
