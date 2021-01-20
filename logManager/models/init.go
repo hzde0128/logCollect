@@ -5,7 +5,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/hzde0128/logCollect/logManager/utils"
 
-        // mysql driver
+	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
 	"time"
 )

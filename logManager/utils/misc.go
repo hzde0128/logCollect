@@ -5,34 +5,34 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"github.com/astaxie/beego/cache"
-        // redis
+	// redis
 	_ "github.com/astaxie/beego/cache/redis"
 	"github.com/astaxie/beego/config"
 )
 
 var (
-        // GServerName 应用程序名称
-	GServerName string 
-        // GMysqlHost mysql地址
-	GMysqlHost  string
-        // GMysqlPort mysql端口
-	GMysqlPort  string
-        // GMysqlUser mysql用户名
-	GMysqlUser  string
-        // GMysqlPass mysql密码
-	GMysqlPass  string
-        // GMysqlDb mysql数据库
-	GMysqlDb    string
-        // GRedisHost redis地址
-	GRedisHost  string
-        // GRedisPort redis端口
-	GRedisPort  string
-        // GRedisDb redis库
-	GRedisDb    string
-        // GEtcdHost etcd地址
-	GEtcdHost   string
-        // GEtcdPort etcd端口
-	GEtcdPort   string
+	// GServerName 应用程序名称
+	GServerName string
+	// GMysqlHost mysql地址
+	GMysqlHost string
+	// GMysqlPort mysql端口
+	GMysqlPort string
+	// GMysqlUser mysql用户名
+	GMysqlUser string
+	// GMysqlPass mysql密码
+	GMysqlPass string
+	// GMysqlDb mysql数据库
+	GMysqlDb string
+	// GRedisHost redis地址
+	GRedisHost string
+	// GRedisPort redis端口
+	GRedisPort string
+	// GRedisDb redis库
+	GRedisDb string
+	// GEtcdHost etcd地址
+	GEtcdHost string
+	// GEtcdPort etcd端口
+	GEtcdPort string
 )
 
 func initConfig() {
