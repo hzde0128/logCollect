@@ -7,11 +7,48 @@
 ![architecture](images/architecture.jpg)
 
 ---
-**说明**
+说明
 
 通过在运维平台上配置日志收集项，logAgent从etcd中获取要收集的日志信息从业务服务器读取日志信息，发往kafka，logTransfer负责从kafka读取日志，写入到Elasticsearch中，通过Kibana进行日志检索。系统性能数据的收集有Node_Exporter进行采集，Prometheus拉取入库，将告警信息推给AlertManager，最后通过Grafana进行可视化展示。
 
 ---
+
+快速开发环境
+
+使用docker-compose快速部署开发环境
+
+```yaml
+version: "3"
+
+networks:
+  app-kafka:
+    driver: bridge
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: zookeeper:3.4.14
+    restart: always
+    networks:
+      - app-kafka
+  kafka:
+    container_name: kafka
+    image: bitnami/kafka:2.4.0
+    restart: always
+    environment: 
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      # 后面三条是暴露给外网使用
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_HOST://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+    ports:
+    - 127.0.0.1:9092:9092
+      # 外网使用29092进行访问
+    - 127.0.0.1:29092:29092
+    networks:
+      - app-kafka
+```
 
 ## v0.1.0版本实现的功能
 
@@ -98,4 +135,3 @@ logManager是有Beego框架搭建起来的web服务，主要是为了方便管�
 [Go运维开发之日志收集（8）将应用程序日志写入到文件中](https://huangzhongde.cn/post/2020-03-05-golang_devops_logAgent_8_with_logrus/)
 
 [Go运维开发之日志收集（9）logTransfer支持多个Topic](https://huangzhongde.cn/post/2020-03-10-golang_devops_logAgent_9_kafka_consumer_group_multi_topics/)
-
