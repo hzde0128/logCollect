@@ -43,7 +43,7 @@ func (c *LoginController) Post() {
 	password := c.GetString("password")
 	// 检查是否记住用户名
 	remember := c.GetString("remember")
-	beego.Info(userName, password, remember)
+	// beego.Info(userName, password, remember)
 
 	// 2.数据处理
 	if userName == "" || password == "" {
